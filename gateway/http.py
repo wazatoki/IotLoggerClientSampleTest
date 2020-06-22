@@ -7,6 +7,7 @@ from config import config
 
 def post_asynchronous(data):
 
+    data.device_id = config.device_id
     response = requests.post(
         'http://'+ config.http_address+':'+config.http_port+'/asynchronous',
         json.dumps(data),
@@ -17,6 +18,7 @@ def post_asynchronous(data):
 
 def post_cyclic(data):
 
+    data.device_id = config.device_id
     response = requests.post(
         'http://'+ config.http_address+':'+config.http_port+'/cyclic',
         json.dumps(data),

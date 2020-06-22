@@ -6,6 +6,7 @@ class Log_data:
     code = ""
     category = ""
     name = ""
+    device_id = ""
 
 index = [
     {"code": "1000", "category": "P-Ven", "name": "OK"},

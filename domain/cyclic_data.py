@@ -13,6 +13,7 @@ class Log_data:
     tart = -32000
     svo2 = -32000
     hct = -32000
+    device_id = ""
     
     def get_Data(self):
 
