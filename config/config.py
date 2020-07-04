@@ -1,3 +1,4 @@
+import os
 import logging
 
 # coding: utf-8
@@ -14,4 +15,4 @@ http_address = config_default.get('address')
 http_port = config_default.get('port')
 serial_port = config_default.get('serial_port')
 
-logging.basicConfig(filename='../log/logger.log')
+logging.basicConfig(filename = '..' + os.sep + 'log' + os.sep + 'logger.log')

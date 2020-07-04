@@ -20,6 +20,7 @@ class Log_data:
         return {
             "version": self.version,
             "datetime": self.dt,
+            "deviceID": self.device_id,
             "speed": self.speed,
             "flow": self.flow,
             "pven": self.pven,
@@ -29,5 +30,5 @@ class Log_data:
             "tven": self.tven,
             "tart": self.tart,
             "svo2": self.svo2,
-            "hct": self.hct,
+            "hct": self.hct
         }
