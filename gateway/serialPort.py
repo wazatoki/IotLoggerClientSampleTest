@@ -43,6 +43,7 @@ def map_cyclic_data(data_array):
     return log_data
 
 def parse_data(recv_data):
+    logging.info('sereal recive data is : ' + recv_data.decode('utf-8'))
     r = recv_data.strip(';').decode('utf-8')
     
     if r[0] == 'ZT':
@@ -52,7 +53,7 @@ def parse_data(recv_data):
         log_data = map_asynchronous_data(r)
         http.post_asynchronous(log_data)
     else:
-        logging.info('sereal response data is broken : ' + recv_data.decode('utf-8'))
+        logging.info('sereal recive data is broken : ' + recv_data.decode('utf-8'))
 
 def watch():
 
