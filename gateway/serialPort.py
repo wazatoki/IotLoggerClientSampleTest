@@ -57,13 +57,17 @@ def parse_data(recv_data):
 
 def watch():
 
-    comport = serial.Serial(config.serial_port, baudrate=115200, bytesize=8, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,timeout=1)
-    recv_data = comport.readline()
-    comport.close()
-    parse_data(recv_data)
+    try:
+        with serial.Serial(config.serial_port, baudrate=115200, bytesize=8, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,timeout=1) as comport:
+            recv_data = comport.readline()
+            parse_data(recv_data)
+    except serial.serialutil.SerialException :
+        logging.error('could not open port ')
+
     t=threading.Timer(2, watch)
     t.start()
 
 def start_watch():
+    logging.info('Iot logger client start')
     t=threading.Thread(target=watch)
     t.start()
