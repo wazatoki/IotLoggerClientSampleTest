@@ -2,14 +2,16 @@ import logging
 import json
 
 import requests
-
+from pytz import timezone
 from config import config
 
 def post_asynchronous(data):
 
-    data.device_id = config.device_id
+    data['deviceID'] = config.device_id
+    data['datetime'] = timezone('Asia/Tokyo').localize(data['datetime']).astimezone(timezone('UTC'))
+    data['datetime'] = data['datetime'].strftime('%Y-%m-%dT%H:%M:%S%z')
     response = requests.post(
-        'http://'+ config.http_address+':'+config.http_port+'/asynchronous',
+        'http://'+ config.http_address+':'+config.http_port+'/api/asynchronous/add',
         json.dumps(data),
         headers={'Content-Type': 'application/json'})
 
@@ -18,9 +20,12 @@ def post_asynchronous(data):
 
 def post_cyclic(data):
 
-    data.device_id = config.device_id
+    data['deviceID'] = config.device_id
+    data['datetime'] = timezone('Asia/Tokyo').localize(data['datetime']).astimezone(timezone('UTC'))
+    data['datetime'] = data['datetime'].strftime('%Y-%m-%dT%H:%M:%S%z')
+    print(json.dumps(data))
     response = requests.post(
-        'http://'+ config.http_address+':'+config.http_port+'/cyclic',
+        'http://'+ config.http_address+':'+config.http_port+'/api/cyclic/add',
         json.dumps(data),
         headers={'Content-Type': 'application/json'})
 
