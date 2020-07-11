@@ -10,6 +10,16 @@ from config import config
 from gateway import http
 from domain import cyclic_data,asynchronous
 
+def create_asynchronous_data():
+    a = random.randint(0,100)
+    ld = asynchronous.Log_data()
+    item = asynchronous.index[a]
+    ld.category = item['category']
+    ld.code = item['code']
+    ld.dt = datetime.now()
+    ld.name = item['name']
+    return ld    
+
 def create_cyclic_data():
 
     max = 100
@@ -43,8 +53,15 @@ def create_cyclic_data():
 
 def watch():
 
-    ld = create_cyclic_data()
-    http.post_cyclic(ld.get_Data())
+    a = random.randint(0,9)
+
+    if a < 2 :
+        ld = create_asynchronous_data()
+        if ld.name != 'OK':
+            http.post_asynchronous(ld.get_Data())
+    else:
+        ld = create_cyclic_data()
+        http.post_cyclic(ld.get_Data())
 
     t=threading.Timer(2, watch)
     t.start()
